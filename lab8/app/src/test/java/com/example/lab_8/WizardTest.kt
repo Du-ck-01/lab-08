@@ -44,4 +44,35 @@ class WizardTest {
 
         assertEquals(70, evilWizard.mana)
     }
+    @Test fun train_DoesNothingOnMinimumMana() {
+        evilWizard.mana = 0
+        evilWizard.spellPower = 0
+        evilWizard.train()
+
+        assertEquals(0, evilWizard.mana)
+        assertEquals(0, evilWizard.spellPower)
+    }
+    @Test fun train_DoesNotSubtractManaOnFailure(){
+        evilWizard.mana = 4
+        evilWizard.spellPower = 0
+        evilWizard.train()
+        assertEquals(4, evilWizard.mana)
+        assertEquals(0, evilWizard.spellPower)
+    }
+    @Test fun train_AddsToSpellPowerOnSuccess(){
+        evilWizard.mana = 5
+        evilWizard.spellPower = 0
+        evilWizard.train()
+
+        assertEquals(0, evilWizard.mana)
+        assertEquals(1, evilWizard.spellPower)
+    }
+    @Test fun train_SubtractsFromManaCorrectlyOnSuccess(){
+        evilWizard.mana = 23
+        evilWizard.spellPower = 0
+        evilWizard.train()
+
+        assertEquals(18, evilWizard.mana)
+        assertEquals(1, evilWizard.spellPower)
+    }
 }
